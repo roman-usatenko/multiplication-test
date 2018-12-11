@@ -12,7 +12,6 @@ namespace MultiplicationTestGUI
 {
     public partial class Form1 : Form
     {
-        private int countdown;
         private readonly ProblemGenerator problemGenerator = new ProblemGenerator();
         private Problem currentProblem;
         private Statistics statistics;
@@ -43,16 +42,15 @@ namespace MultiplicationTestGUI
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (Samples > 0 || countdown >= 0)
+            if (Samples > 0 || progressBar.Value >= 1)
             {
-                if (countdown > 0)
+                if (progressBar.Value > 1)
                 {
-                    countdown--;
-                    lblCountdown.Text = "" + countdown;
+                    progressBar.Value--;
                 }
-                else if (countdown == 0)
+                else if (progressBar.Value == 1)
                 {
-                    countdown--;
+                    progressBar.Value--;
                     CheckSample(true);
                 }
                 else
@@ -96,8 +94,7 @@ namespace MultiplicationTestGUI
         {
             if (Samples > 0)
             {
-                countdown = trackSpeed.Maximum + 1 - trackSpeed.Value;
-                lblCountdown.Text = "" + countdown;
+                progressBar.Value = trackSpeed.Value;
                 currentProblem = problemGenerator.Next();
                 lblEquation.Text = currentProblem.Equation;
                 lblEquation.ForeColor = Color.Black;
@@ -111,7 +108,7 @@ namespace MultiplicationTestGUI
         {
             timer.Enabled = false;
             btnStart.Text = "Start";
-            lblCountdown.Text = "";
+            progressBar.Value = 0;
             lblEquation.Text = "";
             tbAnswer.Text = "";
             tbAnswer.Enabled = false;
@@ -119,7 +116,14 @@ namespace MultiplicationTestGUI
             trackSpeed.Enabled = true;
             if (statistics != null)
             {
-                MessageBox.Show(statistics.ToString(), "Results");
+                string header = "Result";
+                if(statistics.Correct > 0 && statistics > Statistics.CurrentRecord)
+                {
+                    header = "NEW RECORD!";
+                    Statistics.CurrentRecord = statistics;
+                    lblRecord.Text = Statistics.CurrentRecord.ToRecordString();
+                }
+                MessageBox.Show(statistics.ToStatString(), header);
             }
             tbSamples.Focus();
         }
@@ -128,6 +132,7 @@ namespace MultiplicationTestGUI
         {
             statistics = new Statistics();
             statistics.Speed = trackSpeed.Value;
+            progressBar.Maximum = trackSpeed.Value;
             trackSpeed.Enabled = false;
             tbAnswer.Enabled = true;
             tbSamples.Enabled = false;
@@ -166,7 +171,7 @@ namespace MultiplicationTestGUI
                 if (timer.Enabled)
                 {
                     CheckSample(false);
-                    countdown = 0;
+                    progressBar.Value = 1;
                 }
             }
             else if (e.KeyChar == 27)
@@ -194,6 +199,16 @@ namespace MultiplicationTestGUI
         private void Form1_Load(object sender, EventArgs e)
         {
             Stop();
+            trackSpeed_Scroll(sender, e);
+            if(!Statistics.CurrentRecord.IsEmpty)
+            {
+                lblRecord.Text = Statistics.CurrentRecord.ToRecordString();
+            }
+        }
+
+        private void trackSpeed_Scroll(object sender, EventArgs e)
+        {
+            lblSpeed.Text = (trackSpeed.Value) + " sec/sample";
         }
     }
 }
