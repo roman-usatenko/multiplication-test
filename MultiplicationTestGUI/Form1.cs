@@ -125,6 +125,7 @@ namespace MultiplicationTestGUI
                 }
                 MessageBox.Show(statistics.ToStatString(), header);
             }
+            tbSamples.Text = "10";
             tbSamples.Focus();
         }
 

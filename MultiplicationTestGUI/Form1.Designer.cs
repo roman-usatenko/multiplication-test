@@ -32,6 +32,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tbAnswer = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblRecord = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.lblSpeed = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
@@ -41,8 +43,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblEquation = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.label2 = new System.Windows.Forms.Label();
-            this.lblRecord = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackSpeed)).BeginInit();
@@ -98,6 +98,25 @@
             this.panel1.Size = new System.Drawing.Size(611, 95);
             this.panel1.TabIndex = 3;
             // 
+            // lblRecord
+            // 
+            this.lblRecord.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRecord.Location = new System.Drawing.Point(172, 37);
+            this.lblRecord.Name = "lblRecord";
+            this.lblRecord.Size = new System.Drawing.Size(281, 23);
+            this.lblRecord.TabIndex = 10;
+            this.lblRecord.Text = "No record";
+            this.lblRecord.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(260, 5);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(105, 17);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Current Record";
+            // 
             // progressBar
             // 
             this.progressBar.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -139,7 +158,7 @@
             this.tbSamples.PromptChar = ' ';
             this.tbSamples.Size = new System.Drawing.Size(37, 22);
             this.tbSamples.TabIndex = 0;
-            this.tbSamples.Text = "5";
+            this.tbSamples.Text = "10";
             this.tbSamples.TextChanged += new System.EventHandler(this.tbSamples_TextChanged);
             this.tbSamples.Enter += new System.EventHandler(this.tbSamples_Enter);
             this.tbSamples.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSamples_KeyPress);
@@ -195,25 +214,6 @@
             // 
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(260, 5);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(105, 17);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Current Record";
-            // 
-            // lblRecord
-            // 
-            this.lblRecord.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRecord.Location = new System.Drawing.Point(172, 37);
-            this.lblRecord.Name = "lblRecord";
-            this.lblRecord.Size = new System.Drawing.Size(281, 23);
-            this.lblRecord.TabIndex = 10;
-            this.lblRecord.Text = "No record";
-            this.lblRecord.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
